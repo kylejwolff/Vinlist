@@ -1,0 +1,7 @@
+{
+  "name": "Vinlist",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
