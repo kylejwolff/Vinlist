@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ItemService } from '../item.service';
 
@@ -9,14 +10,27 @@ import { ItemService } from '../item.service';
 })
 export class HomePage {
 
-  items = [
-    {"title":"meat","description":"good"},
-    {"title":"meat2","description":"good"},
-    {"title":"meat3","description":"good"},
-  ]
+  items = this.itemService.items
 
   constructor(
-    public itemService: ItemService
+    public itemService: ItemService,
+    private router: Router
   ) {}
 
+  async ngOnInit(){
+    this.itemService.getItems();
+  }
+
+
+  openNewItemPage(){
+    console.log("clicked me");
+    this.router.navigate(["/new-item"]);
+  }
+
+  async removeItem(item){
+    console.log("remove " + item.name);
+    this.itemService.removeItem(item);
+    this.itemService.getItems();
+  }
 }
+

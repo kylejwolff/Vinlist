@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>new-item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<form [formGroup]="new_item_form" (submit)="createItem(new_item_form.value)">
+  <ion-item>
+    <ion-label color="primary" position="floating">Name</ion-label>
+    <ion-input type="text" formControlName="name" required></ion-input>
+  </ion-item>
+  <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!new_item_form.valid">Create</ion-button>
+</form>
+</ion-content>
