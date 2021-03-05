@@ -32,5 +32,9 @@ export class HomePage {
     this.itemService.removeItem(item);
     this.itemService.getItems();
   }
+
+  async update(){
+    this.itemService.update();
+  }
 }
 

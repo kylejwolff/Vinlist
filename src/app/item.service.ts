@@ -35,15 +35,16 @@ export class ItemService {
       'name': name,
       'isChecked': false
     });
-    Storage.set({
-      key: this.SHOPPING_LIST,
-      value: JSON.stringify(this.items)
-    })
+    this.update();
   }
 
   removeItem(item){
     console.log("remove item " + item.name);
     this.items = this.items.filter(e => e !== item);
+    this.update();
+  }
+
+  update(){
     Storage.set({
       key: this.SHOPPING_LIST,
       value: JSON.stringify(this.items)
