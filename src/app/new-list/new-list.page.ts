@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 import { ItemService } from '../item.service';
 
 @Component({
-  selector: 'app-new-item',
-  templateUrl: './new-item.page.html',
-  styleUrls: ['./new-item.page.scss'],
+  selector: 'app-new-list',
+  templateUrl: './new-list.page.html',
+  styleUrls: ['./new-list.page.scss'],
 })
-export class NewItemPage implements OnInit {
+export class NewListPage implements OnInit {
 
-  new_item_form: FormGroup;
+  new_list_form: FormGroup;
 
   constructor(
     private router: Router,
@@ -20,15 +20,15 @@ export class NewItemPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.new_item_form = this.FormBuilder.group({
+    this.new_list_form = this.FormBuilder.group({
       name: new FormControl('', Validators.required)
     })
   }
 
-  createItem(value){
-    this.itemService.createItem(value.name);
-    this.new_item_form.reset();
-    this.router.navigate(['/list']);
+  createList(value){
+    this.itemService.createList(value.name);
+    this.new_list_form.reset();
+    this.router.navigate(['/home']);
   }
 
 }

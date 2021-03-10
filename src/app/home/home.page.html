@@ -13,12 +13,11 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-item *ngFor="let item of itemService.items">
-      <ion-checkbox slot="start" [(ngModel)]="item.isChecked" (ionChange)="update()"></ion-checkbox>
-      <ion-label>
-        {{item.name}}
+    <ion-item *ngFor="let list of itemService.lists">
+      <ion-label (click)="goToList(list)">
+        {{list.name}}
       </ion-label>
-      <ion-button (click)="removeItem(item)">
+      <ion-button (click)="removeList(list)">
         <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
       </ion-button>
     </ion-item>
@@ -26,7 +25,7 @@
 
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button color="primary" (click)="openNewItemPage()">
+      <ion-button color="primary" (click)="openNewListPage()">
         <ion-icon size="large" name="add-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
