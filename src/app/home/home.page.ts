@@ -10,7 +10,7 @@ import { ItemService } from '../item.service';
 })
 export class HomePage {
 
-  items = this.itemService.items
+  lists = this.itemService.lists
 
   constructor(
     public itemService: ItemService,
@@ -18,23 +18,28 @@ export class HomePage {
   ) {}
 
   async ngOnInit(){
-    this.itemService.getItems();
+    this.itemService.getLists();
   }
 
 
-  openNewItemPage(){
-    console.log("clicked me");
-    this.router.navigate(["/new-item"]);
+  openNewListPage(){
+    //console.log("clicked me");
+    this.router.navigate(["/new-list"]);
   }
 
-  async removeItem(item){
-    console.log("remove " + item.name);
-    this.itemService.removeItem(item);
-    this.itemService.getItems();
+  async removeList(list){
+    console.log("remove " + list.name);
+    this.itemService.removeList(list);
+    this.itemService.getLists();
   }
 
   async update(){
-    this.itemService.update();
+    this.itemService.updateLists();
+  }
+
+  goToList(list){
+    this.itemService.updateCurrentList(list.name);
+    this.router.navigate(['/list']);
   }
 }
 
