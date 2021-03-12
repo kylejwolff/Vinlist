@@ -16,6 +16,7 @@ export class ItemService {
   public lists = [];
   private MY_LISTS: string = "myLists";
   private platform: Platform;
+  public current_list: string;
 
   constructor(
     platform: Platform) 
@@ -28,8 +29,8 @@ export class ItemService {
     this.lists = JSON.parse(myLists.value) || [];
   }
 
-  async getItems(name){
-    const myItems = await Storage.get({ key: name});
+  async getItems(){
+    const myItems = await Storage.get({ key: this.current_list});
     this.items = JSON.parse(myItems.value) || [];
   }
 
@@ -42,15 +43,25 @@ export class ItemService {
     this.updateLists();
   }
 
+  createItem(name){
+    let randomId = Math.random().toString(36).substr(2, 5);
+    this.items.push({
+      'id': randomId,
+      'name': name,
+      'isChecked': false
+    })
+    this.updateItems();
+  }
+
   removeList(list){
     console.log("remove list " + list.name);
     this.lists = this.lists.filter(e => e !== list);
     this.updateLists();
   }
 
-  removeItem(listName, item){
+  removeItem(item){
     this.items = this.items.filter(e => e !== item);
-    this.updateItems(listName);
+    this.updateItems();
   }
 
   updateLists(){
@@ -60,12 +71,14 @@ export class ItemService {
     });
   }
 
-  updateItems(listName){
+  updateItems(){
     Storage.set({
-      key: listName,
+      key: this.current_list,
       value: JSON.stringify(this.items)
     });
   }
 
-  createItem(value){}
+  updateCurrentList(listName){
+    this.current_list = listName;
+  }
 }

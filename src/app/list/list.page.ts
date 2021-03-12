@@ -10,8 +10,8 @@ import { ItemService } from '../item.service';
 })
 export class ListPage implements OnInit {
 
-  items = this.itemService.items
-  current_list:any;
+  items: any;
+  current_list: string;
 
   constructor(
     public itemService: ItemService,
@@ -20,19 +20,22 @@ export class ListPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(
-      param => {
-        this.current_list = param;
-      }
-    )
-    this.itemService.getItems(this.current_list.name);
+    this.current_list = this.itemService.current_list;
+    console.log("current list is: ", this.current_list)
+    this.itemService.getItems();
+    this.items = this.itemService.items;
+    console.log(this.items);
+  }
+
+  updateItems(){
+    this.itemService.updateItems();
   }
 
   openNewItemPage(){
     this.router.navigate(["/new-item"]);
   }
 
-  async removeItem(listName, item){
-    this.itemService.removeItem(listName, item);
+  async removeItem(item){
+    this.itemService.removeItem(item);
   }
 }

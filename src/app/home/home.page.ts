@@ -38,7 +38,8 @@ export class HomePage {
   }
 
   goToList(list){
-    this.router.navigate(['/list', list]);
+    this.itemService.updateCurrentList(list.name);
+    this.router.navigate(['/list']);
   }
 }
 

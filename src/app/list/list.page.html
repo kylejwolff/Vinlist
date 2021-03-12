@@ -1,22 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ current_list.name }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ current_list }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{ current_list.name }}</ion-title>
+      <ion-title size="large">{{ current_list }}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-list>
     <ion-item *ngFor="let item of itemService.items">
-      <ion-checkbox slot="start" [(ngModel)]="item.isChecked" (ionChange)="updateItems(current_list.name)"></ion-checkbox>
+      <ion-checkbox slot="start" [(ngModel)]="item.isChecked" (ionChange)="updateItems()"></ion-checkbox>
       <ion-label>
         {{ item.name }}
       </ion-label>
-      <ion-button (click)="removeItem(current_list.name, item)">
+      <ion-button (click)="removeItem(item)">
         <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
       </ion-button>
     </ion-item>
