@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button (click)="this.itemService.updateLists()" defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ current_list }}</ion-title>
   </ion-toolbar>
@@ -15,7 +15,7 @@
   </ion-header>
   <ion-list>
     <ion-item *ngFor="let item of itemService.items">
-      <ion-checkbox slot="start" [(ngModel)]="item.isChecked" (ionChange)="updateItems()"></ion-checkbox>
+      <ion-checkbox slot="start" [(ngModel)]="item.isChecked" (ionChange)="updateItems()" (click)="updateChecked(item.isChecked)"></ion-checkbox>
       <ion-label>
         {{ item.name }}
       </ion-label>

@@ -27,6 +27,10 @@ export class ListPage implements OnInit {
     console.log(this.items);
   }
 
+  updateChecked(isChecked){
+    this.itemService.updateChecked(isChecked);
+  }
+
   updateItems(){
     this.itemService.updateItems();
   }
