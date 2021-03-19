@@ -12,11 +12,10 @@ const { Filesystem, Storage } = Plugins;
 })
 export class ItemService {
 
-  public items = [];
   public lists = [];
   private MY_LISTS: string = "myLists";
   private platform: Platform;
-  public current_list: string;
+  public current_index: any;
 
   constructor(
     platform: Platform) 
@@ -29,16 +28,12 @@ export class ItemService {
     this.lists = JSON.parse(myLists.value) || [];
   }
 
-  async getItems(){
-    const myItems = await Storage.get({ key: this.current_list});
-    this.items = JSON.parse(myItems.value) || [];
-  }
-
   createList(name){
     let randomId = Math.random().toString(36).substr(2, 5);
     this.lists.push({
       'id': randomId,
       'name': name,
+      'items': [],
       'count' : 0,
       'checked' : 0
     });
@@ -47,14 +42,13 @@ export class ItemService {
 
   createItem(name){
     let randomId = Math.random().toString(36).substr(2, 5);
-    this.items.push({
+    this.lists[this.current_index].items.push({
       'id': randomId,
       'name': name,
       'isChecked': false
     })
-    let index = this.lists.findIndex(list => list.name === this.current_list);
-    this.lists[index].count += 1;
-    this.updateItems();
+    this.lists[this.current_index].count += 1;
+    this.updateLists();
   }
 
   removeList(list){
@@ -64,8 +58,8 @@ export class ItemService {
   }
 
   removeItem(item){
-    this.items = this.items.filter(e => e !== item);
-    this.updateItems();
+    this.lists[this.current_index].items = this.lists[this.current_index].items.filter(e => e !== item);
+    this.updateLists();
   }
 
   updateLists(){
@@ -75,24 +69,16 @@ export class ItemService {
     });
   }
 
-  updateItems(){
-    Storage.set({
-      key: this.current_list,
-      value: JSON.stringify(this.items)
-    });
-  }
-
-  updateCurrentList(listName){
-    this.current_list = listName;
+  updateCurrentIndex(listName){
+    this.current_index = this.lists.findIndex(list => list.name === listName);
   }
 
   updateChecked(isChecked){
-    let index = this.lists.findIndex(list => list.name === this.current_list);
     if(isChecked){
-      this.lists[index].checked -= 1;
+      this.lists[this.current_index].checked -= 1;
     }
     else{
-      this.lists[index].checked += 1;
+      this.lists[this.current_index].checked += 1;
     }
   }
 }

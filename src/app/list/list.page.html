@@ -3,18 +3,18 @@
     <ion-buttons slot="start">
       <ion-back-button (click)="this.itemService.updateLists()" defaultHref="home"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ current_list }}</ion-title>
+    <ion-title>{{ list.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{ current_list }}</ion-title>
+      <ion-title size="large">{{ list.name }}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-item *ngFor="let item of itemService.items">
+    <ion-item *ngFor="let item of list.items">
       <ion-checkbox slot="start" [(ngModel)]="item.isChecked" (ionChange)="updateItems()" (click)="updateChecked(item.isChecked)"></ion-checkbox>
       <ion-label>
         {{ item.name }}
