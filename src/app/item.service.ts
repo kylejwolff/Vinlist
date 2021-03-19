@@ -38,7 +38,9 @@ export class ItemService {
     let randomId = Math.random().toString(36).substr(2, 5);
     this.lists.push({
       'id': randomId,
-      'name': name
+      'name': name,
+      'count' : 0,
+      'checked' : 0
     });
     this.updateLists();
   }
@@ -50,6 +52,8 @@ export class ItemService {
       'name': name,
       'isChecked': false
     })
+    let index = this.lists.findIndex(list => list.name === this.current_list);
+    this.lists[index].count += 1;
     this.updateItems();
   }
 
@@ -80,5 +84,15 @@ export class ItemService {
 
   updateCurrentList(listName){
     this.current_list = listName;
+  }
+
+  updateChecked(isChecked){
+    let index = this.lists.findIndex(list => list.name === this.current_list);
+    if(isChecked){
+      this.lists[index].checked -= 1;
+    }
+    else{
+      this.lists[index].checked += 1;
+    }
   }
 }

@@ -8,7 +8,7 @@ import { ItemService } from '../item.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit{
 
   lists = this.itemService.lists
 
