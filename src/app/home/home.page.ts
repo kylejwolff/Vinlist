@@ -38,7 +38,7 @@ export class HomePage implements OnInit{
   }
 
   goToList(list){
-    this.itemService.updateCurrentList(list.name);
+    this.itemService.updateCurrentIndex(list.name);
     this.router.navigate(['/list']);
   }
 }

@@ -10,8 +10,8 @@ import { ItemService } from '../item.service';
 })
 export class ListPage implements OnInit {
 
-  items: any;
-  current_list: string;
+  list: any;
+  current_index: any;
 
   constructor(
     public itemService: ItemService,
@@ -20,11 +20,10 @@ export class ListPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.current_list = this.itemService.current_list;
-    console.log("current list is: ", this.current_list)
-    this.itemService.getItems();
-    this.items = this.itemService.items;
-    console.log(this.items);
+    this.current_index = this.itemService.current_index;
+    console.log("current list is: ", this.current_index)
+    this.list = this.itemService.lists[this.current_index];
+    console.log(this.list);
   }
 
   updateChecked(isChecked){
@@ -32,7 +31,7 @@ export class ListPage implements OnInit {
   }
 
   updateItems(){
-    this.itemService.updateItems();
+    this.itemService.updateLists();
   }
 
   openNewItemPage(){
