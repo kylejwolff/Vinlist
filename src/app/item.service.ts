@@ -1,3 +1,4 @@
+import { isEmptyExpression } from '@angular/compiler';
 import { stringify } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 
@@ -58,6 +59,10 @@ export class ItemService {
   }
 
   removeItem(item){
+    if(item.isChecked){
+      this.lists[this.current_index].checked -= 1;
+    }
+    this.lists[this.current_index].count -= 1;
     this.lists[this.current_index].items = this.lists[this.current_index].items.filter(e => e !== item);
     this.updateLists();
   }
