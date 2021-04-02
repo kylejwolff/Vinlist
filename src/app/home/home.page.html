@@ -15,20 +15,10 @@
       <ion-title size="large">Blister</ion-title>
     </ion-toolbar>
   </ion-header>
-<!--   <ion-list>
-    <ion-item *ngFor="let list of itemService.lists">
-      <ion-label (click)="goToList(list)">
-        {{list.name}}
-      </ion-label>
-      <ion-button (click)="removeList(list)">
-        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-list> -->
-  <ion-card *ngFor="let list of itemService.lists">
+  <ion-card *ngFor="let list of itemService.lists" (click)="goToList(list)">
     <ion-card-title>{{list.name}}</ion-card-title>
     <ion-item>
-      <ion-label (click)="goToList(list)">
+      <ion-label>
         {{list.checked}} / {{list.count}}
       </ion-label>
       <ion-button (click)="removeList(list)">
