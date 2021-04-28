@@ -21,7 +21,7 @@
       <ion-label>
         {{list.checked}} / {{list.count}}
       </ion-label>
-      <ion-button (click)="removeList(list)">
+      <ion-button (click)="presentAlertConfirm(list)">
         <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
       </ion-button>
     </ion-item>

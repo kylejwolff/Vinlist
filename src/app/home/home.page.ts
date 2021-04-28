@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { AlertController } from '@ionic/angular';
 import { ItemService } from '../item.service';
 
 @Component({
@@ -14,13 +14,40 @@ export class HomePage implements OnInit{
 
   constructor(
     public itemService: ItemService,
-    private router: Router
+    private router: Router,
+    public alertController: AlertController
   ) {}
 
   async ngOnInit(){
     this.itemService.getLists();
   }
 
+  async presentAlertConfirm(list) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm Delete',
+      message: 'Delete list ' + list.name + '?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Delete',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.removeList(list);
+            this.router.navigate(['/home']);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 
   openNewListPage(){
     //console.log("clicked me");
