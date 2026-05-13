@@ -4,9 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ItemService } from '../item.service';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.page.html',
-  styleUrls: ['./list.page.scss'],
+    selector: 'app-list',
+    templateUrl: './list.page.html',
+    styleUrls: ['./list.page.scss'],
+    standalone: false
 })
 export class ListPage implements OnInit {
 

@@ -1,5 +1,3 @@
-import { isEmptyExpression } from '@angular/compiler';
-import { stringify } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 
 import { Plugins, Capacitor, FilesystemDirectory } from '@capacitor/core';

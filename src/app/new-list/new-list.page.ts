@@ -1,27 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Validators, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ItemService } from '../item.service';
 
 @Component({
-  selector: 'app-new-list',
-  templateUrl: './new-list.page.html',
-  styleUrls: ['./new-list.page.scss'],
+    selector: 'app-new-list',
+    templateUrl: './new-list.page.html',
+    styleUrls: ['./new-list.page.scss'],
+    standalone: false
 })
 export class NewListPage implements OnInit {
 
-  new_list_form: FormGroup;
+  new_list_form: UntypedFormGroup;
 
   constructor(
     private router: Router,
-    public FormBuilder: FormBuilder,
+    public FormBuilder: UntypedFormBuilder,
     public itemService: ItemService
   ) { }
 
   ngOnInit() {
     this.new_list_form = this.FormBuilder.group({
-      name: new FormControl('', Validators.required)
+      name: new UntypedFormControl('', Validators.required)
     })
   }
 
