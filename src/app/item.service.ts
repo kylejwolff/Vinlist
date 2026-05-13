@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
-
-import { Plugins, Capacitor, FilesystemDirectory } from '@capacitor/core';
-
+import { Preferences } from '@capacitor/preferences';
 import { Platform } from '@ionic/angular';
-
-const { Filesystem, Storage } = Plugins;
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +19,7 @@ export class ItemService {
   }
 
   async getLists(){
-    const myLists = await Storage.get({ key: this.MY_LISTS});
+    const myLists = await Preferences.get({ key: this.MY_LISTS});
     this.lists = JSON.parse(myLists.value) || [];
   }
 
@@ -66,7 +62,7 @@ export class ItemService {
   }
 
   updateLists(){
-    Storage.set({
+    Preferences.set({
       key: this.MY_LISTS,
       value: JSON.stringify(this.lists)
     });
